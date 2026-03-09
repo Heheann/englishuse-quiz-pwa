@@ -1,8 +1,9 @@
 const CACHE_NAME = "cute-vocab-pwa-v2";
 const CORE_ASSETS = [
   "./",
-  "./cute_vocab_game_v6.html",
-  "./manifest.webmanifest"
+"./index.html",
+"./cute_vocab_game_v6.html",
+"./manifest.webmanifest",
 ];
 
 self.addEventListener("install", (event) => {
@@ -36,6 +37,7 @@ self.addEventListener("fetch", (event) => {
         .catch(async () => {
           return (
             (await caches.match(req)) ||
+            (await caches.match("./index.html")) ||
             (await caches.match("./cute_vocab_game_v6.html")) ||
             (await caches.match("./"))
           );
