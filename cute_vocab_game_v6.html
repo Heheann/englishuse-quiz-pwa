@@ -2,8 +2,14 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>特教可愛單字闖關（多學生/排行榜/拼字箱）</title>
+  <meta name="theme-color" content="#ff5aa5" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="可愛單字闖關" />
+  <link rel="manifest" href="manifest.webmanifest" />
   <style>
     :root{
       --bg:#f6f0e9;
@@ -34,7 +40,7 @@
       min-height:100vh;
       overflow-x:hidden;
     }
-    .app{ max-width: 980px; margin: 0 auto; padding: 14px 12px 130px; }
+    .app{ max-width: 980px; margin: 0 auto; padding: 14px 12px calc(130px + env(safe-area-inset-bottom)); }
 
     /* ====== 教室舞台 ====== */
     .stage{
@@ -471,7 +477,7 @@
     .bottomDock{
       position: fixed;
       left: 0; right: 0; bottom: 0;
-      padding: 12px 12px;
+      padding: 12px 12px calc(12px + env(safe-area-inset-bottom));
       background: linear-gradient(180deg, transparent, rgba(255,255,255,.94));
       backdrop-filter: blur(10px);
       z-index: 40;
@@ -550,6 +556,34 @@
 
     /* confetti */
     #confettiCanvas{ position:fixed; inset:0; pointer-events:none; z-index:999; }
+    .installFab{
+      position: fixed;
+      right: 14px;
+      bottom: calc(94px + env(safe-area-inset-bottom));
+      z-index: 60;
+      border-radius: 999px;
+      padding: 12px 16px;
+      font-size: 15px;
+      box-shadow: 0 16px 26px rgba(124,92,255,.28);
+    }
+    .installFab[hidden]{ display:none !important; }
+
+    @media (max-width: 768px){
+      .app{ padding: 10px 8px calc(148px + env(safe-area-inset-bottom)); }
+      .topRow{ padding: 10px; gap:10px; }
+      .mascot{ min-width: 100%; }
+      .menuRow .btn{ flex: 1 1 calc(50% - 10px); font-size: 15px; }
+      .controlBar{ padding: 10px; }
+      .controlBar > .btn{ flex:1 1 calc(50% - 10px); }
+      .pill{ flex:1 1 calc(50% - 10px); }
+      .progress{ min-width: 100%; }
+      .opt{ font-size: 24px; padding: 14px 10px; }
+      .letterTile, .slot{ width: 50px; height: 56px; font-size: 25px; }
+      .dockInner{ flex-direction:column; align-items:stretch; }
+      .dockInner .row .btn{ flex:1; }
+      .installFab{ right: 10px; bottom: calc(116px + env(safe-area-inset-bottom)); }
+    }
+
   </style>
 </head>
 <body>
@@ -627,6 +661,9 @@
     </div>
   </div>
 </div>
+
+
+<button class="btn primary installFab" id="installBtn" hidden>📲 安裝到手機桌面</button>
 
 <div class="bottomDock">
   <div class="dockInner">
@@ -2696,10 +2733,61 @@ document.getElementById("tabLevels").onclick = ()=>setTeacherTab("levels");
 document.getElementById("tabStudents").onclick = ()=>setTeacherTab("students");
 document.getElementById("tabShare").onclick = ()=>setTeacherTab("share");
 
+
+
+/* =========================================================
+   PWA：安裝 / 離線
+========================================================= */
+let deferredInstallPrompt = null;
+
+function setupPWA(){
+  const installBtn = document.getElementById("installBtn");
+
+  window.addEventListener("offline", ()=>{
+    setFeedback("neutral","目前離線模式","網路中斷也可繼續使用已快取內容。");
+  });
+
+  window.addEventListener("online", ()=>{
+    setFeedback("ok","網路已恢復","可同步載入最新內容。");
+  });
+
+  if("serviceWorker" in navigator){
+    window.addEventListener("load", ()=>{
+      navigator.serviceWorker.register("./service-worker.js").catch(err=>{
+        console.warn("Service worker 註冊失敗", err);
+      });
+    });
+  }
+
+  window.addEventListener("beforeinstallprompt", (e)=>{
+    e.preventDefault();
+    deferredInstallPrompt = e;
+    installBtn.hidden = false;
+  });
+
+  window.addEventListener("appinstalled", ()=>{
+    deferredInstallPrompt = null;
+    installBtn.hidden = true;
+    setFeedback("ok","已安裝成功！","可以直接從手機桌面打開囉～");
+  });
+
+  installBtn.addEventListener("click", async ()=>{
+    if(!deferredInstallPrompt){
+      setFeedback("neutral","可從瀏覽器選單安裝","iPhone：分享 → 加入主畫面。Android：選單 → 安裝應用程式。");
+      return;
+    }
+    deferredInstallPrompt.prompt();
+    await deferredInstallPrompt.userChoice;
+    deferredInstallPrompt = null;
+    installBtn.hidden = true;
+  });
+}
+
 /* =========================================================
    28) 初始化
 ========================================================= */
 function init(){
+  setupPWA();
   renderMenu();
   setView(state.view || "review");
   updateTop();
