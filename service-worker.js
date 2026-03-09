@@ -1,9 +1,11 @@
 const CACHE_NAME = "cute-vocab-pwa-v2";
 const CORE_ASSETS = [
   "./",
+
   "./index.html",
   "./cute_vocab_game_v6.html",
   "./manifest.webmanifest",
+
 ];
 
 self.addEventListener("install", (event) => {
