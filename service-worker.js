@@ -1,10 +1,11 @@
-const CACHE_NAME = "cute-vocab-pwa-v2";
+const CACHE_NAME = "cute-vocab-pwa-v3";
 const CORE_ASSETS = [
   "./",
 
   "./index.html",
   "./cute_vocab_game_v6.html",
   "./manifest.webmanifest",
+  "./data/quiz-data.json",
 
 ];
 
