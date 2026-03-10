@@ -1,33 +1,731 @@
+
 {
   "levels": [
     {
-      "id": "L1",
-      "name": "冬天衣物",
+      "id": "L3",
+      "name": "2000單(p23)",
       "words": [
-        { "en": "jacket", "zh": "外套" },
-        { "en": "scarf", "zh": "圍巾" },
-        { "en": "gloves", "zh": "手套" },
-        { "en": "hat", "zh": "帽子" },
-        { "en": "boots", "zh": "靴子" },
-        { "en": "socks", "zh": "襪子" }
+        {
+          "en": "candle",
+          "zh": "蠟燭"
+        },
+        {
+          "en": "candy",
+          "zh": "糖果"
+        },
+        {
+          "en": "cap",
+          "zh": "帽子(無邊)"
+        },
+        {
+          "en": "car",
+          "zh": "汽車"
+        },
+        {
+          "en": "card",
+          "zh": "卡片"
+        },
+        {
+          "en": "care",
+          "zh": "照料/在乎/關心"
+        },
+        {
+          "en": "careful",
+          "zh": "小心的"
+        },
+        {
+          "en": "carry",
+          "zh": "搬運/帶來"
+        },
+        {
+          "en": "case",
+          "zh": "事例"
+        }
       ]
     },
     {
-      "id": "L2",
-      "name": "Rudolph 小故事單字",
+      "id": "L4",
+      "name": "2000單(p24)",
       "words": [
-        { "en": "reindeer", "zh": "馴鹿" },
-        { "en": "red", "zh": "紅色的" },
-        { "en": "nose", "zh": "鼻子" },
-        { "en": "light", "zh": "光" },
-        { "en": "fog", "zh": "霧" },
-        { "en": "fly", "zh": "飛" }
+        {
+          "en": "castle",
+          "zh": "城堡"
+        },
+        {
+          "en": "cat",
+          "zh": "貓"
+        },
+        {
+          "en": "catch",
+          "zh": "抓住/趕上/接住"
+        },
+        {
+          "en": "celebrate",
+          "zh": "慶祝"
+        },
+        {
+          "en": "cellphone",
+          "zh": "手機"
+        },
+        {
+          "en": "cent",
+          "zh": "分(貨幣單位)"
+        },
+        {
+          "en": "center",
+          "zh": "中心"
+        },
+        {
+          "en": "centimeter",
+          "zh": "公分"
+        },
+        {
+          "en": "chair",
+          "zh": "椅子"
+        }
+      ]
+    },
+    {
+      "id": "L5",
+      "name": "2000單(p25)",
+      "words": [
+        {
+          "en": "chalk",
+          "zh": "粉筆"
+        },
+        {
+          "en": "chance",
+          "zh": "機會"
+        },
+        {
+          "en": "change",
+          "zh": "零錢/改變"
+        },
+        {
+          "en": "cheap",
+          "zh": "便宜的"
+        },
+        {
+          "en": "cheat",
+          "zh": "作弊"
+        },
+        {
+          "en": "check",
+          "zh": "支票/檢查"
+        },
+        {
+          "en": "cheer",
+          "zh": "歡呼/提起精神"
+        },
+        {
+          "en": "cheese",
+          "zh": "乳酪"
+        }
+      ]
+    },
+    {
+      "id": "L6",
+      "name": "2000單(p26)",
+      "words": [
+        {
+          "en": "chicken",
+          "zh": "雞肉/小雞"
+        },
+        {
+          "en": "child",
+          "zh": "孩童"
+        },
+        {
+          "en": "China",
+          "zh": "中國"
+        },
+        {
+          "en": "Chinese",
+          "zh": "中文/中國人/中文的"
+        },
+        {
+          "en": "chocolate",
+          "zh": "巧克力"
+        },
+        {
+          "en": "choice",
+          "zh": "選擇"
+        },
+        {
+          "en": "choose",
+          "zh": "選擇"
+        }
+      ]
+    },
+    {
+      "id": "L7",
+      "name": "2000單(p27)",
+      "words": [
+        {
+          "en": "chopsticks",
+          "zh": "筷子"
+        },
+        {
+          "en": "Christmas",
+          "zh": "聖誕節"
+        },
+        {
+          "en": "church",
+          "zh": "教堂"
+        },
+        {
+          "en": "circle",
+          "zh": "圓圈"
+        },
+        {
+          "en": "city",
+          "zh": "城市"
+        },
+        {
+          "en": "clap",
+          "zh": "鼓掌"
+        },
+        {
+          "en": "class",
+          "zh": "班級/課"
+        },
+        {
+          "en": "classmate",
+          "zh": "同學"
+        },
+        {
+          "en": "classroom",
+          "zh": "教室"
+        }
+      ]
+    },
+    {
+      "id": "L8",
+      "name": "2000單(p28)",
+      "words": [
+        {
+          "en": "clean",
+          "zh": "乾淨的/打掃"
+        },
+        {
+          "en": "clear",
+          "zh": "清澈的/無雲的"
+        },
+        {
+          "en": "clerk",
+          "zh": "職員"
+        },
+        {
+          "en": "climb",
+          "zh": "爬"
+        },
+        {
+          "en": "clock",
+          "zh": "時鐘"
+        },
+        {
+          "en": "close",
+          "zh": "親密的/關"
+        },
+        {
+          "en": "clothes",
+          "zh": "衣服"
+        },
+        {
+          "en": "cloud",
+          "zh": "雲"
+        },
+        {
+          "en": "cloudy",
+          "zh": "多雲的"
+         }
+      ]
+    },
+    {
+  "id": "L9",
+      "name": "2000單(p29)",
+      "words": [
+        {
+          "en": "club",
+          "zh": "社團/俱樂部"
+        },
+        {
+          "en": "coat",
+          "zh": "外套"
+        },
+        {
+          "en": "coffee",
+          "zh": "咖啡"
+        },
+        {
+          "en": "cold",
+          "zh": "寒冷的/感冒"
+        },
+        {
+          "en": "collect",
+          "zh": "收集"
+        },
+        {
+          "en": "color",
+          "zh": "顏色"
+        },
+        {
+          "en": "comb",
+          "zh": "梳子"
+        },
+        {
+          "en": "come",
+          "zh": "來"
+        },
+        {
+          "en": "comfortable",
+          "zh": "舒適的"
+        }
+      ]
+    },
+    {
+      "id": "L10",
+      "name": "2000單(p30)",
+      "words": [
+        {
+          "en": "comic",
+          "zh": "喜劇的/漫畫的"
+        },
+        {
+          "en": "common",
+          "zh": "普通的/共同的"
+        },
+        {
+          "en": "computer",
+          "zh": "電腦"
+        },
+        {
+          "en": "convenient",
+          "zh": "方便的"
+        },
+        {
+          "en": "cook",
+          "zh": "廚師/烹調"
+        },
+        {
+          "en": "cookie",
+          "zh": "餅乾"
+        },
+        {
+          "en": "cool",
+          "zh": "涼爽的/酷"
+        }
+      ]
+    },
+    {
+      "id": "L11",
+      "name": "2000單(p31)",
+      "words": [
+        {
+          "en": "copy",
+          "zh": "複製品/抄襲"
+        },
+        {
+          "en": "corner",
+          "zh": "轉角"
+        },
+        {
+          "en": "correct",
+          "zh": "正確的"
+        },
+        {
+          "en": "cost",
+          "zh": "花費(錢)"
+        },
+        {
+          "en": "couch",
+          "zh": "長沙發"
+        },
+        {
+          "en": "count",
+          "zh": "計算/數"
+        },
+        {
+          "en": "country",
+          "zh": "鄉下/國家"
+        },
+        {
+          "en": "course",
+          "zh": "課程/科目"
+        }
+      ]
+    },
+    {
+      "id": "L12",
+      "name": "2000單(p32)",
+      "words": [
+        {
+          "en": "cousin",
+          "zh": "堂(表)兄弟姐妹"
+        },
+        {
+          "en": "cover",
+          "zh": "遮蓋"
+        },
+        {
+          "en": "cow",
+          "zh": "乳牛"
+        },
+        {
+          "en": "crazy",
+          "zh": "狂熱的"
+        },
+        {
+          "en": "cross",
+          "zh": "越過/橫過"
+        },
+        {
+          "en": "cry",
+          "zh": "哭/大叫"
+        },
+        {
+          "en": "cup",
+          "zh": "杯子"
+        },
+        {
+          "en": "cut",
+          "zh": "切割/砍斷"
+        },
+        {
+          "en": "cute",
+          "zh": "可愛的"
+        },
+        {
+          "en": "dance",
+          "zh": "跳舞"
+        },
+        {
+          "en": "dangerous",
+          "zh": "危險的"
+        }
+      ]
+    },
+    {
+      "id": "L13",
+      "name": "2000單(p33)",
+      "words": [
+        {
+          "en": "dark",
+          "zh": "黑暗的/深色的"
+        },
+        {
+          "en": "date",
+          "zh": "日期/約會"
+        },
+        {
+          "en": "daughter",
+          "zh": "女兒"
+        },
+        {
+          "en": "day",
+          "zh": "天/一日/白晝/紀念日"
+        },
+        {
+          "en": "dead",
+          "zh": "死亡的"
+        },
+        {
+          "en": "deal",
+          "zh": "交易/協議/處理/應付"
+        },
+        {
+          "en": "dear",
+          "zh": "親愛的/珍貴的"
+        }
+      ]
+    },
+    {
+      "id": "L14",
+      "name": "2000單(p34)",
+      "words": [
+        {
+          "en": "death",
+          "zh": "死亡"
+        },
+        {
+          "en": "December",
+          "zh": "十二月"
+        },
+        {
+          "en": "decide",
+          "zh": "決定"
+        },
+        {
+          "en": "deep",
+          "zh": "深的"
+        },
+        {
+          "en": "define",
+          "zh": "下定義"
+        },
+        {
+          "en": "delicious",
+          "zh": "美味的"
+        },
+        {
+          "en": "dentist",
+          "zh": "牙醫"
+        },
+        {
+          "en": "department store",
+          "zh": "百貨公司"
+        }
+      ]
+    },
+    {
+      "id": "L15",
+      "name": "2000單(p35)",
+      "words": [
+        {
+          "en": "desk",
+          "zh": "書桌"
+        },
+        {
+          "en": "dictionary",
+          "zh": "字典"
+        },
+        {
+          "en": "die",
+          "zh": "死亡/枯萎"
+        },
+        {
+          "en": "different",
+          "zh": "不同的"
+        },
+        {
+          "en": "difficult",
+          "zh": "困難的"
+        },
+        {
+          "en": "dig",
+          "zh": "挖"
+        },
+        {
+          "en": "dining room",
+          "zh": "飯廳"
+        },
+        {
+          "en": "dinner",
+          "zh": "晚餐"
+        }
+      ]
+    },
+    {
+      "id": "L16",
+      "name": "2000單(p36)",
+      "words": [
+        {
+          "en": "dirty",
+          "zh": "髒的"
+        },
+        {
+          "en": "dish",
+          "zh": "碟/盤/菜餚"
+        },
+        {
+          "en": "do",
+          "zh": "做"
+        },
+        {
+          "en": "doctor/Dr.",
+          "zh": "醫生/博士"
+        },
+        {
+          "en": "dog",
+          "zh": "狗"
+        },
+        {
+          "en": "doll",
+          "zh": "洋娃娃"
+        },
+        {
+          "en": "dollar",
+          "zh": "元"
+        },
+        {
+          "en": "door",
+          "zh": "門"
+        },
+        {
+          "en": "dot",
+          "zh": "(小圓)點"
+        }
+      ]
+    },
+    {
+      "id": "L17",
+      "name": "2000單(p37)",
+      "words": [
+        {
+          "en": "down",
+          "zh": "向下"
+        },
+        {
+          "en": "download",
+          "zh": "下載"
+        },
+        {
+          "en": "dozen",
+          "zh": "一打/十二個"
+        },
+        {
+          "en": "draw",
+          "zh": "繪畫"
+        },
+        {
+          "en": "drawer",
+          "zh": "抽屜"
+        },
+        {
+          "en": "dream",
+          "zh": "夢想/做夢"
+        }
+      ]
+    },
+    {
+      "id": "L18",
+      "name": "2000單(p38)",
+      "words": [
+        {
+          "en": "dress",
+          "zh": "洋裝/穿著"
+        },
+        {
+          "en": "drink",
+          "zh": "飲料/一杯/喝"
+        },
+        {
+          "en": "driver",
+          "zh": "司機"
+        },
+        {
+          "en": "drop",
+          "zh": "滴/滴下/落下"
+        },
+        {
+          "en": "drum",
+          "zh": "鼓"
+        },
+        {
+          "en": "drive",
+          "zh": "開車/兜風"
+        }
+      ]
+    },
+    {
+      "id": "L19",
+      "name": "2000單(p39)",
+      "words": [
+        {
+          "en": "dry",
+          "zh": "乾燥的"
+        },
+        {
+          "en": "duck",
+          "zh": "鴨子"
+        },
+        {
+          "en": "during",
+          "zh": "在...期間"
+        },
+        {
+          "en": "each",
+          "zh": "每個(的)/每一"
+        },
+        {
+          "en": "ear",
+          "zh": "耳朵"
+        },
+        {
+          "en": "early",
+          "zh": "早的/早"
+        }
+      ]
+    },
+    {
+      "id": "L20",
+      "name": "2000單(p40)",
+      "words": [
+        {
+          "en": "earth",
+          "zh": "地球"
+        },
+        {
+          "en": "earthquake",
+          "zh": "地震"
+        },
+        {
+          "en": "east",
+          "zh": "東/東部的/朝東"
+        },
+        {
+          "en": "Easter",
+          "zh": "復活節"
+        },
+        {
+          "en": "easy",
+          "zh": "容易的"
+        },
+        {
+          "en": "eat",
+          "zh": "吃"
+        },
+        {
+          "en": "egg",
+          "zh": "蛋"
+        },
+        {
+          "en": "eight",
+          "zh": "八(的)"
+        },
+        {
+          "en": "eighteen",
+          "zh": "十八(的)"
+         }
       ]
     }
   ],
   "students": [
-    { "id": "S1", "name": "小辰", "emoji": "👧🏻", "optionCount": 4, "spellHintAfter2": false },
-    { "id": "S2", "name": "小芝", "emoji": "👧🏼", "optionCount": 3, "spellHintAfter2": false },
-    { "id": "S3", "name": "小臻", "emoji": "👧🏽", "optionCount": 2, "spellHintAfter2": true }
+    {
+      "id": "S1",
+      "name": "千慶",
+      "emoji": "🙂",
+      "optionCount": 6,
+      "spellHintAfter2": true
+    },
+    {
+      "id": "S2",
+      "name": "煜智",
+      "emoji": "🙂",
+      "optionCount": 5,
+      "spellHintAfter2": true
+    },
+    {
+      "id": "S3",
+      "name": "益德",
+      "emoji": "🙂",
+      "optionCount": 3,
+      "spellHintAfter2": true
+    },
+    {
+      "id": "Smjjnljnkiznl",
+      "name": "尊泓",
+      "emoji": "🙂",
+      "optionCount": 4,
+      "spellHintAfter2": true
+    },
+    {
+      "id": "Smjquw34ux5fw",
+      "name": "雨歆",
+      "emoji": "🙂",
+      "optionCount": 2,
+      "spellHintAfter2": true
+    }
   ]
 }
+
