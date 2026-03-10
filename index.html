@@ -913,6 +913,8 @@
 ========================================================= */
 const LS_KEY_DATA  = "sped_cute_vocab_data_v6";
 const LS_KEY_STATE = "sped_cute_vocab_state_v6";
+const REMOTE_DATA_URL = "./data/quiz-data.json";
+const REMOTE_FETCH_TIMEOUT_MS = 2500;
 
 /* =========================================================
    1) 預設資料：關卡 + 學生
@@ -1042,6 +1044,30 @@ function loadState(){
   }
 }
 function saveState(){ localStorage.setItem(LS_KEY_STATE, JSON.stringify(state)); }
+
+async function tryLoadRemoteData(){
+  const ctrl = new AbortController();
+  const timeout = setTimeout(()=>ctrl.abort(), REMOTE_FETCH_TIMEOUT_MS);
+  try{
+    const res = await fetch(`${REMOTE_DATA_URL}?t=${Date.now()}`, { signal: ctrl.signal });
+    if(!res.ok) throw new Error(`HTTP ${res.status}`);
+    const remote = normalizeData(await res.json());
+    data = remote;
+    saveData();
+
+    state.levelIndex = Math.min(state.levelIndex, data.levels.length-1);
+    if(state.activeStudentId && !data.students.find(s=>s.id===state.activeStudentId)){
+      state.activeStudentId = data.students[0]?.id || null;
+    }
+    saveState();
+    return true;
+  }catch(err){
+    console.info("遠端題庫載入失敗，改用本機資料", err);
+    return false;
+  }finally{
+    clearTimeout(timeout);
+  }
+}
 
 /* =========================================================
    4) 計時器（進入遊戲才跑）
@@ -2786,8 +2812,10 @@ function setupPWA(){
 /* =========================================================
    28) 初始化
 ========================================================= */
-function init(){
+async function init(){
   setupPWA();
+  const usedRemote = await tryLoadRemoteData();
+
   renderMenu();
   setView(state.view || "review");
   updateTop();
@@ -2796,6 +2824,8 @@ function init(){
     setFeedback("neutral","請先選學生身分～","選好後就可以開始闖關！");
     renderStudentPicker();
     document.getElementById("studentDialog").showModal();
+  }else if(usedRemote){
+    setFeedback("ok",`已自動載入雲端題庫`,`來源：${REMOTE_DATA_URL}`);
   }else{
     setFeedback("neutral",`歡迎～${student().emoji} ${student().name}`,"先複習再開始！");
   }

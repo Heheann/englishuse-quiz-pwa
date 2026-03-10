@@ -1,0 +1,33 @@
+{
+  "levels": [
+    {
+      "id": "L1",
+      "name": "冬天衣物",
+      "words": [
+        { "en": "jacket", "zh": "外套" },
+        { "en": "scarf", "zh": "圍巾" },
+        { "en": "gloves", "zh": "手套" },
+        { "en": "hat", "zh": "帽子" },
+        { "en": "boots", "zh": "靴子" },
+        { "en": "socks", "zh": "襪子" }
+      ]
+    },
+    {
+      "id": "L2",
+      "name": "Rudolph 小故事單字",
+      "words": [
+        { "en": "reindeer", "zh": "馴鹿" },
+        { "en": "red", "zh": "紅色的" },
+        { "en": "nose", "zh": "鼻子" },
+        { "en": "light", "zh": "光" },
+        { "en": "fog", "zh": "霧" },
+        { "en": "fly", "zh": "飛" }
+      ]
+    }
+  ],
+  "students": [
+    { "id": "S1", "name": "小辰", "emoji": "👧🏻", "optionCount": 4, "spellHintAfter2": false },
+    { "id": "S2", "name": "小芝", "emoji": "👧🏼", "optionCount": 3, "spellHintAfter2": false },
+    { "id": "S3", "name": "小臻", "emoji": "👧🏽", "optionCount": 2, "spellHintAfter2": true }
+  ]
+}
