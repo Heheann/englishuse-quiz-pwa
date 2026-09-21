@@ -3751,7 +3751,14 @@ async function tryLoadRemoteData(){
     const res = await fetch(`${REMOTE_DATA_URL}?t=${Date.now()}`, { signal: ctrl.signal });
     if(!res.ok) throw new Error(`HTTP ${res.status}`);
     const remote = normalizeData(await res.json());
-    data = remote;
+    // 雲端檔案負責更新題庫；學生名單則保留老師在這台裝置上的修改。
+    const savedStudents = Array.isArray(data.students)
+      ? structuredClone(data.students)
+      : [];
+    data = {
+      ...remote,
+      students: savedStudents.length ? savedStudents : remote.students,
+    };
     saveData();
 
     state.levelIndex = Math.min(state.levelIndex, data.levels.length-1);
