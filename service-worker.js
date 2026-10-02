@@ -1,4 +1,4 @@
-const CACHE_NAME = "cute-vocab-pwa-v4";
+const CACHE_NAME = "cute-vocab-pwa-v5";
 const CORE_ASSETS = [
   "./",
 

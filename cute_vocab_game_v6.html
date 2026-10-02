@@ -914,6 +914,7 @@
 const LS_KEY_DATA  = "sped_cute_vocab_data_v7";
 const LS_KEY_STATE = "sped_cute_vocab_state_v6";
 const LS_KEY_CUSTOM_LEVELS = "sped_cute_vocab_custom_levels_v1";
+const RETIRED_LEVEL_IDS = new Set(["L3", "L4"]);
 const REMOTE_DATA_URL = "./data/quiz-data.json";
 const REMOTE_FETCH_TIMEOUT_MS = 2500;
 
@@ -1010,12 +1011,102 @@ const DEFAULT_DATA = {
                        ]
                    },
                    {
-                       "id":  "L3",
-                       "name":  "2000單(p17-19)",
+                       "id": "P11",
+                       "name": "2000單(p11)",
+                       "words": [
+                           {"en": "as", "zh": "像；擔任；一樣"},
+                           {"en": "ask", "zh": "詢問；要求"},
+                           {"en": "at", "zh": "在……地點；在……時間；在……方面"},
+                           {"en": "attack", "zh": "攻擊"},
+                           {"en": "August", "zh": "八月"},
+                           {"en": "aunt", "zh": "伯母；嬸嬸；姑姑"},
+                           {"en": "autumn/fall", "zh": "秋天"},
+                           {"en": "away", "zh": "離開"}
+                       ]
+                   },
+                   {
+                       "id": "P12",
+                       "name": "2000單(p12)",
+                       "words": [
+                           {"en": "baby", "zh": "嬰兒"},
+                           {"en": "back", "zh": "後面的；回原處；後面；背部"},
+                           {"en": "bad", "zh": "壞的；嚴重的"},
+                           {"en": "badminton", "zh": "羽毛球"},
+                           {"en": "bag", "zh": "袋"},
+                           {"en": "bake", "zh": "烤"},
+                           {"en": "bakery", "zh": "麵包店"}
+                       ]
+                   },
+                   {
+                       "id": "P13",
+                       "name": "2000單(p13)",
+                       "words": [
+                           {"en": "balcony", "zh": "陽臺"},
+                           {"en": "banana", "zh": "香蕉"},
+                           {"en": "band", "zh": "樂團"},
+                           {"en": "bank", "zh": "銀行；堤防"},
+                           {"en": "baseball", "zh": "棒球"},
+                           {"en": "basket", "zh": "籃子"},
+                           {"en": "basketball", "zh": "籃球"},
+                           {"en": "bat", "zh": "球棒；蝙蝠"},
+                           {"en": "bath", "zh": "洗澡"},
+                           {"en": "bathroom", "zh": "浴室"}
+                       ]
+                   },
+                   {
+                       "id": "P14",
+                       "name": "2000單(p14)",
+                       "words": [
+                           {"en": "be", "zh": "是"},
+                           {"en": "beach", "zh": "沙灘"},
+                           {"en": "bean", "zh": "豆"},
+                           {"en": "bear", "zh": "熊"},
+                           {"en": "beautiful", "zh": "美麗的"},
+                           {"en": "because", "zh": "因為"},
+                           {"en": "become", "zh": "成為；變得"},
+                           {"en": "bed", "zh": "床"},
+                           {"en": "bedroom", "zh": "臥室"}
+                       ]
+                   },
+                   {
+                       "id": "P15",
+                       "name": "2000單(p15)",
+                       "words": [
+                           {"en": "bee", "zh": "蜜蜂"},
+                           {"en": "beef", "zh": "牛肉"},
+                           {"en": "before", "zh": "在……之前；以前"},
+                           {"en": "begin", "zh": "開始"},
+                           {"en": "behind", "zh": "在……後面"},
+                           {"en": "believe", "zh": "相信"},
+                           {"en": "bell", "zh": "鐘；鈴"},
+                           {"en": "belong", "zh": "屬於"},
+                           {"en": "below", "zh": "在……下面"}
+                       ]
+                   },
+                   {
+                       "id": "P16",
+                       "name": "2000單(p16)",
+                       "words": [
+                           {"en": "belt", "zh": "腰帶"},
+                           {"en": "bench", "zh": "長凳"},
+                           {"en": "beside", "zh": "在……旁邊"},
+                           {"en": "between", "zh": "在……之間"},
+                           {"en": "bicycle/bike", "zh": "腳踏車"},
+                           {"en": "big", "zh": "大的"},
+                           {"en": "bird", "zh": "鳥"},
+                           {"en": "birthday", "zh": "生日"},
+                           {"en": "bite", "zh": "咬"},
+                           {"en": "black", "zh": "黑色（的）"},
+                           {"en": "blackboard", "zh": "黑板"}
+                       ]
+                   },
+                   {
+                       "id":  "P17",
+                       "name":  "2000單(p17)",
                        "words":  [
                                      {
                                          "en":  "blank",
-                                         "zh":  "空白的；空格"
+                                         "zh":  "空白（的）；空格"
                                      },
                                      {
                                          "en":  "blanket",
@@ -1035,7 +1126,7 @@ const DEFAULT_DATA = {
                                      },
                                      {
                                          "en":  "blue",
-                                         "zh":  "藍色；沮喪的"
+                                         "zh":  "藍色的；沮喪的；藍色"
                                      },
                                      {
                                          "en":  "boat",
@@ -1048,89 +1139,44 @@ const DEFAULT_DATA = {
                                      {
                                          "en":  "boil",
                                          "zh":  "燒熱；煮熟"
-                                     },
-                                     {
-                                         "en":  "book",
-                                         "zh":  "書"
-                                     },
-                                     {
-                                         "en":  "bookstore",
-                                         "zh":  "書店"
-                                     },
-                                     {
-                                         "en":  "bored",
-                                         "zh":  "感到厭煩的"
-                                     },
-                                     {
-                                         "en":  "boring",
-                                         "zh":  "令人厭煩的；乏味的"
-                                     },
-                                     {
-                                         "en":  "born",
-                                         "zh":  "出生的；天生的"
-                                     },
-                                     {
-                                         "en":  "borrow",
-                                         "zh":  "借來"
-                                     },
-                                     {
-                                         "en":  "boss",
-                                         "zh":  "老闆"
-                                     },
-                                     {
-                                         "en":  "both",
-                                         "zh":  "兩者"
-                                     },
-                                     {
-                                         "en":  "bottle",
-                                         "zh":  "瓶"
-                                     },
-                                     {
-                                         "en":  "bottom",
-                                         "zh":  "底部"
-                                     },
-                                     {
-                                         "en":  "bow",
-                                         "zh":  "鞠躬"
-                                     },
-                                     {
-                                         "en":  "bowl",
-                                         "zh":  "碗"
                                      }
                                  ]
                    },
                    {
-                       "id":  "L4",
-                       "name":  "2000單(p19-22)",
+                       "id": "P18",
+                       "name": "2000單(p18)",
+                       "words": [
+                           {"en": "book", "zh": "書；冊"},
+                           {"en": "bookstore", "zh": "書店"},
+                           {"en": "bored", "zh": "感到厭煩的"},
+                           {"en": "boring", "zh": "令人厭煩的；乏味的"},
+                           {"en": "born", "zh": "出生的；天生的；出生"},
+                           {"en": "borrow", "zh": "借來"},
+                           {"en": "boss", "zh": "老闆"},
+                           {"en": "both", "zh": "兩者"}
+                       ]
+                   },
+                   {
+                       "id": "P19",
+                       "name": "2000單(p19)",
+                       "words": [
+                           {"en": "bottle", "zh": "瓶"},
+                           {"en": "bottom", "zh": "底部"},
+                           {"en": "bow", "zh": "鞠躬"},
+                           {"en": "bowl", "zh": "碗"},
+                           {"en": "box", "zh": "箱；盒"},
+                           {"en": "boy", "zh": "男孩"},
+                           {"en": "brave", "zh": "勇敢的"},
+                           {"en": "bread", "zh": "麵包"},
+                           {"en": "break", "zh": "損壞；摔斷；休息"},
+                           {"en": "breakfast", "zh": "早餐"},
+                           {"en": "bridge", "zh": "橋"}
+                       ]
+                   },
+                   {
+                       "id":  "P20",
+                       "name":  "2000單(p20)",
                        "words":  [
-                                     {
-                                         "en":  "box",
-                                         "zh":  "箱；盒"
-                                     },
-                                     {
-                                         "en":  "boy",
-                                         "zh":  "男孩"
-                                     },
-                                     {
-                                         "en":  "brave",
-                                         "zh":  "勇敢的"
-                                     },
-                                     {
-                                         "en":  "bread",
-                                         "zh":  "麵包"
-                                     },
-                                     {
-                                         "en":  "break",
-                                         "zh":  "損壞；摔斷；休息"
-                                     },
-                                     {
-                                         "en":  "breakfast",
-                                         "zh":  "早餐"
-                                     },
-                                     {
-                                         "en":  "bridge",
-                                         "zh":  "橋"
-                                     },
                                      {
                                          "en":  "bright",
                                          "zh":  "明亮的"
@@ -1145,7 +1191,7 @@ const DEFAULT_DATA = {
                                      },
                                      {
                                          "en":  "brown",
-                                         "zh":  "棕色"
+                                         "zh":  "棕色（的）"
                                      },
                                      {
                                          "en":  "brush",
@@ -1166,72 +1212,35 @@ const DEFAULT_DATA = {
                                      {
                                          "en":  "burn",
                                          "zh":  "燃燒"
-                                     },
-                                     {
-                                         "en":  "bus",
-                                         "zh":  "巴士"
-                                     },
-                                     {
-                                         "en":  "business",
-                                         "zh":  "生意"
-                                     },
-                                     {
-                                         "en":  "business man",
-                                         "zh":  "生意人"
-                                     },
-                                     {
-                                         "en":  "busy",
-                                         "zh":  "忙碌的"
-                                     },
-                                     {
-                                         "en":  "but",
-                                         "zh":  "但是"
-                                     },
-                                     {
-                                         "en":  "butter",
-                                         "zh":  "奶油"
-                                     },
-                                     {
-                                         "en":  "butterfly",
-                                         "zh":  "蝴蝶"
-                                     },
-                                     {
-                                         "en":  "button",
-                                         "zh":  "鈕扣"
-                                     },
-                                     {
-                                         "en":  "buy",
-                                         "zh":  "買"
-                                     },
-                                     {
-                                         "en":  "by",
-                                         "zh":  "藉由；搭乘；被"
-                                     },
-                                     {
-                                         "en":  "cake",
-                                         "zh":  "蛋糕"
-                                     },
-                                     {
-                                         "en":  "call",
-                                         "zh":  "打電話；稱呼"
-                                     },
-                                     {
-                                         "en":  "camera",
-                                         "zh":  "照相機"
-                                     },
-                                     {
-                                         "en":  "camp",
-                                         "zh":  "營隊；露營"
-                                     },
-                                     {
-                                         "en":  "can",
-                                         "zh":  "能夠；可以"
-                                     },
-                                     {
-                                         "en":  "could",
-                                         "zh":  "能夠；可以"
                                      }
                                  ]
+                   },
+                   {
+                       "id": "P21",
+                       "name": "2000單(p21)",
+                       "words": [
+                           {"en": "bus", "zh": "巴士"},
+                           {"en": "business", "zh": "生意"},
+                           {"en": "businessman", "zh": "生意人"},
+                           {"en": "busy", "zh": "忙碌的"},
+                           {"en": "but", "zh": "但是"},
+                           {"en": "butter", "zh": "奶油"},
+                           {"en": "butterfly", "zh": "蝴蝶"},
+                           {"en": "button", "zh": "鈕扣；按鈕"},
+                           {"en": "buy", "zh": "買"}
+                       ]
+                   },
+                   {
+                       "id": "P22",
+                       "name": "2000單(p22)",
+                       "words": [
+                           {"en": "by", "zh": "藉由；搭乘；被"},
+                           {"en": "cake", "zh": "蛋糕"},
+                           {"en": "call", "zh": "打電話；稱呼"},
+                           {"en": "camera", "zh": "照相機"},
+                           {"en": "camp", "zh": "營隊；露營"},
+                           {"en": "can/could", "zh": "能夠；可以"}
+                       ]
                    },
                    {
                        "id":  "L3_2",
@@ -3841,7 +3850,7 @@ function mergeRemoteAndCustomLevels(remoteLevels, customLevels){
   const merged = remoteLevels.map(level=>customById.get(level.id) || level);
 
   customLevels.forEach(level=>{
-    if(!remoteIds.has(level.id)) merged.push(level);
+    if(!remoteIds.has(level.id) && !RETIRED_LEVEL_IDS.has(level.id)) merged.push(level);
   });
   return merged;
 }
