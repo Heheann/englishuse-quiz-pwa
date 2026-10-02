@@ -785,7 +785,7 @@
 
       <div class="row" style="justify-content:flex-end;margin-top:10px">
         <button class="btn ghost" id="playAgainBtn">🔁 再玩一次</button>
-        <button class="btn primary" id="nextLevelBtn">➡️ 下一關</button>
+        <button class="btn primary" id="nextLevelBtn">➡️ 下一步</button>
       </div>
     </div>
   </div>
@@ -4406,6 +4406,8 @@ function markComplete(modeLabelText){
   stopTimer();
   const stu = student();
   const lv = level();
+  const modeIndex = Math.max(0, MODES.findIndex(mode=>mode.key === state.modeKey));
+  const isLastMode = modeIndex === MODES.length - 1;
   if(stu){
     const ss = ensureStudentStats(stu.id);
     const pl = ensurePerLevel(stu.id, lv.id);
@@ -4417,9 +4419,14 @@ function markComplete(modeLabelText){
   logCompletion(modeLabelText);
 
   openResultDialog({
-    title:`✅ ${student()?.emoji || "🙂"} 完成本關：${lv.name}`,
-    sub:`活動：${modeLabelText}｜本關耗時：${fmtTime(getElapsedMs())}`,
-    canNext:true
+    title: isLastMode
+      ? `✅ ${student()?.emoji || "🙂"} 完成本頁全部活動：${lv.name}`
+      : `✅ ${student()?.emoji || "🙂"} 完成活動：${modeLabelText}`,
+    sub:`第 ${modeIndex+1} / ${MODES.length} 個活動｜本活動耗時：${fmtTime(getElapsedMs())}`,
+    canNext:true,
+    nextLabel: isLastMode
+      ? "➡️ 下一頁單字"
+      : `➡️ 下一個活動：${MODES[modeIndex+1].label}`
   });
 
   resetTimer();
@@ -4439,7 +4446,7 @@ function game_listen_choose(words){
   function nextQ(){
     if(idx >= order.length){
       setProgress(words.length, words.length);
-      setFeedback("ok","你通關啦！🎉","可以按「下一關」或「再玩一次」。");
+      setFeedback("ok","你通關啦！🎉","可以按「下一個活動」或「再玩一次」。");
       fireConfetti();
       markComplete("🎧 耳朵小偵探");
       return;
@@ -5094,7 +5101,7 @@ function summarizeStudent(stuId){
   return { html, tips: tips.join("<br>") };
 }
 
-function openResultDialog({title, sub, canNext}){
+function openResultDialog({title, sub, canNext, nextLabel="➡️ 下一步"}){
   const stu = student();
   if(!stu){ return; }
   const sum = summarizeStudent(stu.id);
@@ -5102,7 +5109,9 @@ function openResultDialog({title, sub, canNext}){
   document.getElementById("resultSub").textContent = sub;
   document.getElementById("resultStats").innerHTML = sum.html;
   document.getElementById("resultTips").innerHTML  = sum.tips;
-  document.getElementById("nextLevelBtn").style.display = canNext ? "" : "none";
+  const nextBtn = document.getElementById("nextLevelBtn");
+  nextBtn.textContent = nextLabel;
+  nextBtn.style.display = canNext ? "" : "none";
   document.getElementById("resultDialog").showModal();
 }
 
@@ -5667,11 +5676,24 @@ document.getElementById("playAgainBtn").onclick = ()=>{
 };
 document.getElementById("nextLevelBtn").onclick = ()=>{
   document.getElementById("resultDialog").close();
-  state.levelIndex = (state.levelIndex + 1) % data.levels.length;
-  saveState();
-  resetTimer();
-  setView("review");
-  setFeedback("neutral","下一關！先複習再開始～","");
+  const modeIndex = MODES.findIndex(mode=>mode.key === state.modeKey);
+  const hasNextMode = modeIndex >= 0 && modeIndex < MODES.length - 1;
+
+  if(hasNextMode){
+    const nextMode = MODES[modeIndex + 1];
+    state.modeKey = nextMode.key;
+    saveState();
+    resetTimer();
+    setView("game");
+    setFeedback("neutral",`下一個活動：${nextMode.label}`,"同一頁單字，換一種方式再練習！");
+  }else{
+    state.levelIndex = (state.levelIndex + 1) % data.levels.length;
+    state.modeKey = MODES[0].key;
+    saveState();
+    resetTimer();
+    setView("review");
+    setFeedback("neutral","下一頁單字！先複習再開始～",`活動會從「${MODES[0].label}」重新開始。`);
+  }
 };
 
 document.getElementById("tabLevels").onclick = ()=>setTeacherTab("levels");
