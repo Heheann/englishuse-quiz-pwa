@@ -3752,6 +3752,7 @@ const DEFAULT_DATA = {
 const MODES = [
   { key:"listen_choose", label:"🎧 耳朵小偵探", desc:"聽英文 → 選出正確中文" },
   { key:"en_choose_zh", label:"👀 眼睛翻譯官", desc:"看英文 → 選出正確中文" },
+  { key:"zh_choose_en", label:"🔎 中文找英文", desc:"看中文 → 選出正確英文" },
   { key:"match",        label:"🧩 甜甜圈配對局", desc:"英文 ↔ 中文 快速配對" },
   { key:"memory",       label:"🃏 星星翻翻樂", desc:"翻兩張配對（記憶力UP）" },
   { key:"spell_magic",  label:"🪄 魔法拼字箱", desc:"拖曳字母 → 拼出完整單字" },
@@ -4341,7 +4342,7 @@ function buildOptions(pool, correctValue, k){
 }
 
 /* =========================================================
-   17) 遊戲：五模式
+   17) 遊戲：六模式
 ========================================================= */
 function renderGame(){
   const lv = level();
@@ -4362,6 +4363,8 @@ function renderGame(){
     game_listen_choose(lv.words.slice());
   }else if(state.modeKey === "en_choose_zh"){
     game_en_choose_zh(lv.words.slice());
+  }else if(state.modeKey === "zh_choose_en"){
+    game_zh_choose_en(lv.words.slice());
   }else if(state.modeKey === "match"){
     game_match(lv.words.slice());
   }else if(state.modeKey === "memory"){
@@ -4545,6 +4548,73 @@ function game_en_choose_zh(words){
         }else{
           playSfx("bad");
           setFeedback("bad", pick(["再試一次～","沒關係！","差一點！"]), "提示：按「唸英文」或點英文再聽一次。");
+          recordAttempt(false);
+        }
+      };
+      opts.appendChild(b);
+    });
+
+    setProgress(idx, words.length);
+  }
+
+  nextQ();
+}
+
+/* =========================================================
+   🔎 中文找英文：看中文 → 選英文
+========================================================= */
+function game_zh_choose_en(words){
+  const area = document.getElementById("gameArea");
+  const order = shuffle([...words.keys()]);
+  let idx = 0;
+  let q = null;
+  const k = getStudentOptionCount();
+
+  function nextQ(){
+    if(idx >= order.length){
+      setProgress(words.length, words.length);
+      setFeedback("ok","完成！你很棒～✨","換別的活動再玩一次也可以！");
+      fireConfetti();
+      markComplete("🔎 中文找英文");
+      return;
+    }
+
+    q = words[order[idx]];
+    current = { type:"zh_choose_en", word:q };
+
+    setQuestionBox({
+      badge: "🔎 中文找英文",
+      title: `第${state.levelIndex+1}關｜每題 ${k} 選項`,
+      main: q.zh,
+      sub: "選出正確英文（點中文會唸一次）",
+      onMainClick: ()=>speak(q.zh,"zh-TW"),
+      buttonsHtml: `<button class="btn" id="qPlayZh">🔊 唸中文</button>`
+    });
+    document.getElementById("qPlayZh").onclick = ()=> speak(q.zh,"zh-TW");
+
+    const options = buildOptions(words.map(w=>w.en), q.en, k);
+
+    area.innerHTML = `<div class="options" id="opts"></div>`;
+    const opts = area.querySelector("#opts");
+
+    options.forEach(en=>{
+      const b = document.createElement("button");
+      b.className = "opt";
+      b.textContent = en;
+      b.onclick = ()=>{
+        speak(en, "en-US");
+        if(en === q.en){
+          playSfx("ok");
+          setFeedback("ok", pick(["答對了！","太棒了！","好極了！","你很準！"]), `+10 分｜${q.zh} = ${q.en}`);
+          recordAttempt(true);
+          addScore(10);
+          fireConfetti();
+          idx += 1;
+          setProgress(idx, words.length);
+          setTimeout(nextQ, 350);
+        }else{
+          playSfx("bad");
+          setFeedback("bad", pick(["再試一次～","沒關係！","差一點！"]), "提示：按「唸中文」或點中文再聽一次。");
           recordAttempt(false);
         }
       };
@@ -4971,7 +5041,7 @@ function game_spell_magic(words){
 }
 
 /* =========================================================
-   19) 播放按鈕（依目前題目播英文）
+   19) 播放按鈕（依目前活動播放題目）
 ========================================================= */
 document.getElementById("playBtn").onclick = ()=>{
   if(state.view !== "game"){
@@ -4982,8 +5052,13 @@ document.getElementById("playBtn").onclick = ()=>{
     setFeedback("neutral","還沒產生題目～","請稍等或重新開始。");
     return;
   }
-  speak(current.word.en, "en-US");
-  setFeedback("neutral","🔊 播放英文","可以再按一次重聽。");
+  if(current.type === "zh_choose_en"){
+    speak(current.word.zh, "zh-TW");
+    setFeedback("neutral","🔊 播放中文","可以再按一次重聽。");
+  }else{
+    speak(current.word.en, "en-US");
+    setFeedback("neutral","🔊 播放英文","可以再按一次重聽。");
+  }
 };
 
 /* =========================================================
