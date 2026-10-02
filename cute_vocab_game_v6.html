@@ -923,6 +923,93 @@ const REMOTE_FETCH_TIMEOUT_MS = 2500;
 const DEFAULT_DATA = {
     "levels":  [
                    {
+                       "id": "P5",
+                       "name": "2000單(p5)",
+                       "words": [
+                           {"en": "a/an", "zh": "一個"},
+                           {"en": "a.m.", "zh": "上午"},
+                           {"en": "able", "zh": "能夠"},
+                           {"en": "about", "zh": "有關；大約"},
+                           {"en": "above", "zh": "在……之上"},
+                           {"en": "abroad", "zh": "出國；到海外"},
+                           {"en": "across", "zh": "在……對面"},
+                           {"en": "act", "zh": "行動"}
+                       ]
+                   },
+                   {
+                       "id": "P6",
+                       "name": "2000單(p6)",
+                       "words": [
+                           {"en": "action", "zh": "行動"},
+                           {"en": "actor", "zh": "男演員"},
+                           {"en": "actress", "zh": "女演員"},
+                           {"en": "actually", "zh": "實際地"},
+                           {"en": "afraid", "zh": "害怕的；擔心的"},
+                           {"en": "after", "zh": "……之後；在……之後"},
+                           {"en": "afternoon", "zh": "下午"},
+                           {"en": "again", "zh": "再"},
+                           {"en": "age", "zh": "年齡"}
+                       ]
+                   },
+                   {
+                       "id": "P7",
+                       "name": "2000單(p7)",
+                       "words": [
+                           {"en": "ago", "zh": "以前"},
+                           {"en": "agree", "zh": "同意"},
+                           {"en": "ahead", "zh": "領先；在前面"},
+                           {"en": "air", "zh": "空氣；空中"},
+                           {"en": "airplane/plane", "zh": "飛機"},
+                           {"en": "airport", "zh": "機場"},
+                           {"en": "all", "zh": "全部的；全部"},
+                           {"en": "allow", "zh": "允許"}
+                       ]
+                   },
+                   {
+                       "id": "P8",
+                       "name": "2000單(p8)",
+                       "words": [
+                           {"en": "almost", "zh": "幾乎"},
+                           {"en": "along", "zh": "沿著"},
+                           {"en": "already", "zh": "已經"},
+                           {"en": "also", "zh": "也"},
+                           {"en": "always", "zh": "總是；永遠"},
+                           {"en": "America", "zh": "美國"},
+                           {"en": "American", "zh": "美國人；美國的"},
+                           {"en": "and", "zh": "和；而且"},
+                           {"en": "angle", "zh": "角；角度；觀點；歪曲；釣魚"}
+                       ]
+                   },
+                   {
+                       "id": "P9",
+                       "name": "2000單(p9)",
+                       "words": [
+                           {"en": "angry", "zh": "生氣的"},
+                           {"en": "animal", "zh": "動物"},
+                           {"en": "another", "zh": "另一個"},
+                           {"en": "answer", "zh": "答案；回應"},
+                           {"en": "ant", "zh": "螞蟻"},
+                           {"en": "any", "zh": "任何的；任何"},
+                           {"en": "anyone/anybody", "zh": "任何人；誰"},
+                           {"en": "anything", "zh": "任何事物"}
+                       ]
+                   },
+                   {
+                       "id": "P10",
+                       "name": "2000單(p10)",
+                       "words": [
+                           {"en": "apartment", "zh": "公寓"},
+                           {"en": "appear", "zh": "出現；似乎；看起來好像"},
+                           {"en": "apple", "zh": "蘋果"},
+                           {"en": "April", "zh": "四月"},
+                           {"en": "area", "zh": "區域"},
+                           {"en": "arm", "zh": "手臂"},
+                           {"en": "around", "zh": "在四周；在附近；大約"},
+                           {"en": "arrive", "zh": "到達"},
+                           {"en": "art", "zh": "藝術"}
+                       ]
+                   },
+                   {
                        "id":  "L3",
                        "name":  "2000單(p17-19)",
                        "words":  [
@@ -3746,6 +3833,19 @@ function saveCustomLevels(){
   }
 }
 
+function mergeRemoteAndCustomLevels(remoteLevels, customLevels){
+  if(!Array.isArray(customLevels) || customLevels.length===0) return remoteLevels;
+
+  const customById = new Map(customLevels.map(level=>[level.id, level]));
+  const remoteIds = new Set(remoteLevels.map(level=>level.id));
+  const merged = remoteLevels.map(level=>customById.get(level.id) || level);
+
+  customLevels.forEach(level=>{
+    if(!remoteIds.has(level.id)) merged.push(level);
+  });
+  return merged;
+}
+
 function saveLevelData(){
   saveCustomLevels();
   saveData();
@@ -3785,7 +3885,7 @@ async function tryLoadRemoteData(){
       : [];
     data = {
       ...remote,
-      levels: savedLevels?.length ? savedLevels : remote.levels,
+      levels: mergeRemoteAndCustomLevels(remote.levels, savedLevels),
       students: savedStudents.length ? savedStudents : remote.students,
     };
     saveData();
