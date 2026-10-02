@@ -913,6 +913,7 @@
 ========================================================= */
 const LS_KEY_DATA  = "sped_cute_vocab_data_v7";
 const LS_KEY_STATE = "sped_cute_vocab_state_v6";
+const LS_KEY_CUSTOM_LEVELS = "sped_cute_vocab_custom_levels_v1";
 const REMOTE_DATA_URL = "./data/quiz-data.json";
 const REMOTE_FETCH_TIMEOUT_MS = 2500;
 
@@ -3724,6 +3725,32 @@ function loadData(){
 }
 function saveData(){ localStorage.setItem(LS_KEY_DATA, JSON.stringify(data)); }
 
+function loadCustomLevels(){
+  try{
+    const raw = localStorage.getItem(LS_KEY_CUSTOM_LEVELS);
+    if(!raw) return null;
+    const levels = JSON.parse(raw);
+    if(!Array.isArray(levels) || levels.length===0) return null;
+    return normalizeData({
+      levels,
+      students: structuredClone(DEFAULT_DATA.students),
+    }).levels;
+  }catch{
+    return null;
+  }
+}
+
+function saveCustomLevels(){
+  if(Array.isArray(data.levels) && data.levels.length){
+    localStorage.setItem(LS_KEY_CUSTOM_LEVELS, JSON.stringify(data.levels));
+  }
+}
+
+function saveLevelData(){
+  saveCustomLevels();
+  saveData();
+}
+
 function loadState(){
   try{
     const raw = localStorage.getItem(LS_KEY_STATE);
@@ -3751,12 +3778,14 @@ async function tryLoadRemoteData(){
     const res = await fetch(`${REMOTE_DATA_URL}?t=${Date.now()}`, { signal: ctrl.signal });
     if(!res.ok) throw new Error(`HTTP ${res.status}`);
     const remote = normalizeData(await res.json());
-    // 雲端檔案負責更新題庫；學生名單則保留老師在這台裝置上的修改。
+    // 雲端檔案提供預設題庫；老師儲存過的關卡與學生名單保留在這台裝置。
+    const savedLevels = loadCustomLevels();
     const savedStudents = Array.isArray(data.students)
       ? structuredClone(data.students)
       : [];
     data = {
       ...remote,
+      levels: savedLevels?.length ? savedLevels : remote.levels,
       students: savedStudents.length ? savedStudents : remote.students,
     };
     saveData();
@@ -5141,7 +5170,7 @@ function collectLevelEditorToData(){
 
 function saveConfig(){
   collectLevelEditorToData();
-  saveData();
+  saveLevelData();
   saveState();
   renderMenu();
   setFeedback("ok","題庫已儲存","本關單字數會完整呈現。");
@@ -5162,7 +5191,7 @@ function addNewLevel(){
       {en:"dog", zh:"狗"},
     ]
   });
-  saveData();
+  saveLevelData();
   renderMenu();
   renderTeacherLevelSelector();
   document.getElementById("editLevelSelect").value = String(data.levels.length-1);
@@ -5177,7 +5206,7 @@ function deleteCurrentLevel(){
   }
   const idx = Number(document.getElementById("editLevelSelect").value);
   data.levels.splice(idx,1);
-  saveData();
+  saveLevelData();
   state.levelIndex = Math.min(state.levelIndex, data.levels.length-1);
   saveState();
   renderMenu();
@@ -5298,7 +5327,7 @@ function importJson(){
   try{
     const parsed = normalizeData(JSON.parse(raw));
     data = parsed;
-    saveData();
+    saveLevelData();
 
     state.levelIndex = Math.min(state.levelIndex, data.levels.length-1);
     if(state.activeStudentId && !data.students.find(s=>s.id===state.activeStudentId)){
